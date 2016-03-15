@@ -19,6 +19,10 @@ To start point-to-point communications between two nodes, run an instance of gou
 
 Point-to-point communications should be available now.
 
-# future
+## future
 
 Under consideration is making goutong more modular and functional, for the purposes of program internal communications.
+
+# e-mail
+
+The program `comsen.py` composes an e-mail by interrogating the user and then attempts to send the e-mail. The program `e-mail_1.py` attempts to send an e-mail that is defined in its code.
