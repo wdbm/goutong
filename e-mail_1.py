@@ -33,7 +33,7 @@
 """
 
 name    = "e-mail_1"
-version = "2016-03-15T1355Z"
+version = "2016-03-15T1401Z"
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -44,7 +44,7 @@ def main():
     message = MIMEMultipart("alternative")
     message["Subject"] = "We are watching you."
     message["From"]    = "thecolonel@localhost"
-    message["To"]      = "w.bm@cern.ch"
+    message["To"]      = "mulder@fbi.g0v"
     
     text = "The Event is at hand."
     html = """\
