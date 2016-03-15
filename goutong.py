@@ -11,6 +11,8 @@
 #                                                                              #
 # This program is a point-to-point UDP communications program.                 #
 #                                                                              #
+# copyright (C) 2016 William Breaden Madden                                    #
+#                                                                              #
 # This software is released under the terms of the GNU General Public License  #
 # version 3 (GPLv3).                                                           #
 #                                                                              #
@@ -31,7 +33,7 @@
 """
 
 name    = "goutong"
-version = "2016-03-15T1350Z"
+version = "2016-03-15T1356Z"
 
 import socket
 import sys

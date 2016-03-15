@@ -11,6 +11,8 @@
 #                                                                              #
 # This program composes and sends an e-mail.                                   #
 #                                                                              #
+# copyright (C) 2016 William Breaden Madden                                    #
+#                                                                              #
 # This software is released under the terms of the GNU General Public License  #
 # version 3 (GPLv3).                                                           #
 #                                                                              #
@@ -31,7 +33,7 @@
 """
 
 name    = "comsen"
-version = "2016-03-15T1338Z"
+version = "2016-03-15T1355Z"
 
 import sys
 import smtplib
