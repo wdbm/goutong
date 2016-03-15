@@ -3,13 +3,13 @@
 """
 ################################################################################
 #                                                                              #
-# goutong                                                                      #
+# comsen                                                                       #
 #                                                                              #
 ################################################################################
 #                                                                              #
 # LICENCE INFORMATION                                                          #
 #                                                                              #
-# This program is a point-to-point UDP communications program.                 #
+# This program composes and sends an e-mail.                                   #
 #                                                                              #
 # This software is released under the terms of the GNU General Public License  #
 # version 3 (GPLv3).                                                           #
@@ -30,55 +30,39 @@
 ################################################################################
 """
 
-name    = "goutong"
-version = "2016-03-15T1350Z"
+name    = "comsen"
+version = "2016-03-15T1338Z"
 
-import socket
 import sys
-import select
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 def main():
 
-    port_number_default = 2718
-    host                = get_input("Enter I.P. address: ")
-    port_number         = get_input(
-        "Enter port number (default {port_number_default}): ".format(
-            port_number_default = port_number_default
+    print("\ncompose e-mail and send\n")
+    message = MIMEMultipart("alternative")
+    message["Subject"] = get_input("subject: ")
+    message["From"]    = get_input("from (e.g. thecolonel@localhost): ")
+    message["To"]      = get_input("to: ")
+    text               = get_input("message: ")
+
+    part1 = MIMEText(text, "plain")
+
+    message.attach(part1)
+
+    get_input("\nPress Enter to send.\n")
+
+    try:
+        server = smtplib.SMTP("localhost")
+        server.sendmail(
+            message["From"],
+            message["To"],
+            message.as_string()
         )
-    ) or port_number_default
-    port                = int(str(port_number), 10)
-    address_remote      = (host, port)
-    # Create a datagram socket for UDP.
-    socket_UDP = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    # Set the socket to be reusable.
-    socket_UDP.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    # Set the socket to accept incoming broadcasts.
-    socket_UDP.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-    # Disengage socket blocking.
-    socket_UDP.setblocking(False)
-    # Set the socket to accept connections on the port.
-    socket_UDP.bind(('', port))
-    print("accept connections on port {port_number}".format(
-        port_number = str(hex(port))
-    ))
-    # Communicate data in a loop.
-    while True:
-        # receive
-        try:
-            # buffer size: 8192 (change as needed)
-            message, address = socket_UDP.recvfrom(8192)
-            if message:
-                print("{address}:{port_number}> {message}".format(
-                    address     = address[0],
-                    port_number = port_number,
-                    message     = message.rstrip('\n')
-                ))
-        except:
-            pass
-        # send
-        input_message = get_line();
-        if input_message != False:
-            socket_UDP.sendto(input_message, address_remote)
+        server.quit()
+    except smtplib.SMTPException:
+       print("e-mail send error")
 
 def get_input(
     prompt = None
@@ -88,14 +72,5 @@ def get_input(
     else:
         return raw_input(prompt)
 
-# Read a line using select for non-blocking reading of sys.stdin.
-def get_line():
-    i, o, e = select.select([sys.stdin], [], [], 0.0001)
-    for s in i:
-        if s == sys.stdin:
-            input_message = sys.stdin.readline()
-            return(input_message)
-    return(False)
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
