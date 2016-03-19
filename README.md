@@ -25,4 +25,4 @@ Under consideration is making goutong more modular and functional, for the purpo
 
 # e-mail
 
-The program `comsen.py` composes an e-mail by interrogating the user and then attempts to send the e-mail. The program `e-mail_1.py` attempts to send an e-mail that is defined in its code.
+The program `comsen.py` composes an e-mail by interrogating the user and then attempts to send the e-mail. The program `e-mail_1.py` attempts to send an e-mail that is defined in its code. The program `rec.py` receives e-mails and saves them to files.
